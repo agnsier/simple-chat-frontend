@@ -62,9 +62,9 @@
           this.user = this.login
         }
       },
-      send(evt) {
+      send(e) {
         this.messages.push({
-          text: evt,
+          text: e,
           user: this.user
         })
       },
