@@ -34,11 +34,18 @@
     methods: {
       send() {
         if (this.message !== '') {
-          this.$emit('newMessage', this.message)
+          this.$emit('newMessage', this.message);
           this.message = ''
         }
       },
+      scrollToBottom() {
+        let container = this.$el.querySelector('.messages-box');
+        container.scrollTop = container.scrollHeight;
+      }
     },
+    updated() {
+      this.scrollToBottom()
+    }
   }
 </script>
 <style>

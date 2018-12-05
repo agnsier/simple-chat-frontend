@@ -27,7 +27,6 @@
   </div>
 </template>
 
-
 <script>
   import messages from './messages'
 
@@ -39,18 +38,7 @@
       return {
         user: '',
         login: '',
-        messages: [
-          {text: 'Hi there!', user: 'Aga'},
-          {text: 'Hello hello!', user: 'Host'},
-          {text: 'Hi there!', user: 'Aga'},
-          {text: 'Hello hello!', user: 'Host'},
-          {text: 'Hi there!', user: 'Aga'},
-          {text: 'Hello hello!', user: 'Host'},
-          {text: 'Hi there!', user: 'Aga'},
-          {text: 'Hello hello!', user: 'Host'},
-          {text: 'Hi there!', user: 'Aga'},
-          {text: 'Hello hello!', user: 'Host'},
-        ],
+        messages: [],
         message: ''
       }
     },
@@ -59,14 +47,22 @@
         if (this.login.length === 0) {
           this.open()
         } else {
-          this.user = this.login
+          this.user = this.login;
+          this.sockets.subscribe(`channel-${this.user}`, data => {
+            this.messages.push({
+              user: data.user,
+              text: data.text
+            })
+          })
         }
       },
       send(e) {
-        this.messages.push({
-          text: e,
-          user: this.user
-        })
+        let message = {
+          user: this.user,
+          text: e
+        };
+        this.$socket.emit('message-to-host', message);
+        this.messages.push(message)
       },
       open() {
         this.$message({message: 'Name is required', type: 'error'});
