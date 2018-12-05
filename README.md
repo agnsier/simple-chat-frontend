@@ -2,9 +2,9 @@
 
 > A Vue.js project. Client-Host chat with SocketIO support. This repository is only frontend implementation. For backend solution refer to: https://github.com/agnsier/simple-chat-backend. To use application you need to have backend and frontend running simultaneously. 
 
-Available paths on port 8080:
-- client view: /client
-- host view: /host
+Available paths:
+- client view: localhost:8080/#/client
+- host view: localhost:8080/#/host
 
 ## Build Setup
 
